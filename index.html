@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Честит рожден ден, Костадине!</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:system-ui,-apple-system,sans-serif;
+    background:#ffffff;
+    color:#222;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+.card{
+    max-width:800px;
+    padding:50px 30px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:10px 20px;
+    border-radius:999px;
+    background:#f3f4f6;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:4rem;
+    margin:0;
+    color:#111827;
+}
+
+.name{
+    color:#2563eb;
+    margin-top:10px;
+}
+
+.subtitle{
+    font-size:1.2rem;
+    color:#666;
+    margin:25px 0 40px;
+    line-height:1.6;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin:40px 0;
+}
+
+.item{
+    background:#f8fafc;
+    padding:20px;
+    border-radius:18px;
+    transition:.3s;
+}
+
+.item:hover{
+    transform:translateY(-4px);
+}
+
+.number{
+    font-size:2rem;
+    font-weight:700;
+    color:#2563eb;
+}
+
+button{
+    padding:16px 32px;
+    border:none;
+    border-radius:14px;
+    background:#2563eb;
+    color:white;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
+
+#message{
+    display:none;
+    margin-top:40px;
+    padding:35px;
+    background:#eff6ff;
+    border-radius:24px;
+    animation:show .8s ease;
+}
+
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.confetti{
+    position:fixed;
+    width:12px;
+    height:12px;
+    top:-20px;
+    z-index:9999;
+    pointer-events:none;
+}
+
+.big-title{
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.03);}
+    100%{transform:scale(1);}
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<div class="badge">🎉 НОВО НИВО ОТКЛЮЧЕНО</div>
+
+<h1 class="big-title">LEVEL 46</h1>
+
+<h2 class="name">Костадин Казаков</h2>
+
+<p class="subtitle">
+Официално потвърдено: още една година опит,
+повече истории за разказване и още едно успешно отключено ниво.
+</p>
+
+<div class="stats">
+    <div class="item">
+        <div class="number">46</div>
+        Години опит
+    </div>
+
+    <div class="item">
+        <div class="number">100%</div>
+        Чувство за хумор
+    </div>
+
+    <div class="item">
+        <div class="number">∞</div>
+        Спомени
+    </div>
+
+    <div class="item">
+        <div class="number">+1</div>
+        Ново ниво
+    </div>
+</div>
+
+<button onclick="showWish()">
+🎁 Отвори пожеланието
+</button>
+
+<div id="message">
+    <h2>🎂 Честит рожден ден, Динко!</h2>
+
+    <p>
+        Нека новата година ти донесе здраве,
+        спокойствие, успехи и много поводи за усмивки.
+    </p>
+
+    <p>
+        Продължавай да вървиш напред със същото чувство за хумор,
+        увереност и енергия.
+    </p>
+
+    <p>
+        Най-хубавите моменти тепърва предстоят!
+    </p>
+
+    <h3>🚀 Level 46 успешно активирано.</h3>
+</div>
+
+<audio id="partySound" preload="auto">
+    <source src="applause.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+
+function showWish(){
+
+    document.getElementById("message").style.display = "block";
+
+    const sound = document.getElementById("partySound");
+
+    sound.play().catch(() => {});
+
+    createConfetti();
+}
+
+function createConfetti(){
+
+    for(let i = 0; i < 250; i++){
+
+        const confetti = document.createElement("div");
+
+        confetti.className = "confetti";
+
+        confetti.style.left = Math.random()*100 + "vw";
+
+        confetti.style.background =
+            `hsl(${Math.random()*360},100%,60%)`;
+
+        document.body.appendChild(confetti);
+
+        const duration = Math.random()*3 + 2;
+        const drift = (Math.random()-0.5)*400;
+
+        confetti.animate(
+            [
+                {
+                    transform:"translate(0,0) rotate(0deg)",
+                    opacity:1
+                },
+                {
+                    transform:`translate(${drift}px,110vh) rotate(${Math.random()*1440}deg)`,
+                    opacity:1
+                }
+            ],
+            {
+                duration:duration*1000,
+                easing:"linear"
+            }
+        );
+
+        setTimeout(()=>{
+            confetti.remove();
+        },duration*1000);
+    }
+}
+</script>
+
+</body>
+</html>

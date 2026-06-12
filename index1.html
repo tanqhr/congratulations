@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level 46 - Kostadin</title>
+
+<style>
+body{
+    margin:0;
+    font-family:system-ui;
+    background:#fff;
+    overflow:hidden;
+    text-align:center;
+}
+
+/* LOADING */
+#loading{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2rem;
+}
+
+/* MAIN */
+#main{
+    display:none;
+    padding:40px;
+}
+
+h1{
+    font-size:3.5rem;
+    margin:10px;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
+
+button{
+    padding:15px 30px;
+    border:none;
+    background:#2563eb;
+    color:white;
+    font-size:1rem;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+/* CONFETTI */
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:-10px;
+    z-index:9999;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading">Loading Level 46... ⏳</div>
+
+<div id="main">
+
+<h1>🎂 LEVEL 46 UNLOCKED</h1>
+
+<h2>Костадин Казаков</h2>
+
+<p>Системата потвърждава: Legendary status activated.</p>
+
+<button onclick="startCelebration()">
+🎁 Start Celebration
+</button>
+
+</div>
+
+<!-- AUDIO -->
+<audio id="song">
+    <source src="https://www.soundjay.com/human/sounds/happy-birthday-song-01.mp3">
+</audio>
+
+<audio id="applause">
+    <source src="https://www.soundjay.com/human/sounds/applause-8.mp3">
+</audio>
+
+<script>
+
+setTimeout(()=>{
+    document.getElementById("loading").style.display="none";
+    document.getElementById("main").style.display="block";
+},2500);
+
+function startCelebration(){
+
+    // 1. play music
+    document.getElementById("song").play();
+
+    // 2. confetti burst
+    for(let i=0;i<200;i++){
+
+        let c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+
+        document.body.appendChild(c);
+
+        let duration=Math.random()*3+2;
+
+        c.animate([
+            {transform:"translateY(0) rotate(0deg)"},
+            {transform:`translateY(110vh) rotate(720deg)`}
+        ],{
+            duration:duration*1000,
+            easing:"linear"
+        });
+
+        setTimeout(()=>c.remove(),duration*1000);
+    }
+
+    // 3. applause after delay
+    setTimeout(()=>{
+        document.getElementById("applause").play();
+    },2500);
+
+    // 4. final message
+    setTimeout(()=>{
+        alert("🎉 ЧЕСТИТ РОЖДЕН ДЕН, КОСТАДИНЕ! LEVEL 46 COMPLETE 🎉");
+    },4000);
+}
+
+</script>
+
+</body>
+</html>

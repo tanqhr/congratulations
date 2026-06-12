@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 Честит Рожден Ден!</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff6b6b,#ffb347,#ffd93d);
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+
+.container{
+    text-align:center;
+    color:white;
+    z-index:10;
+    padding:20px;
+}
+
+h1{
+    font-size:4rem;
+    animation:pop 1.5s infinite alternate;
+    text-shadow:0 0 20px rgba(0,0,0,.2);
+}
+
+p{
+    font-size:1.4rem;
+    margin-top:20px;
+}
+
+button{
+    margin-top:30px;
+    padding:15px 30px;
+    border:none;
+    border-radius:50px;
+    background:white;
+    color:#ff6b6b;
+    font-size:1.1rem;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+.hidden{
+    display:none;
+}
+
+.message{
+    margin-top:30px;
+    font-size:1.5rem;
+    animation:fadeIn 1s ease;
+}
+
+.confetti{
+    position:absolute;
+    width:10px;
+    height:10px;
+    top:-10px;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+
+@keyframes pop{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.1);
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎂 Честит Рожден Ден!</h1>
+
+    <p>
+        Днес е специален ден!
+    </p>
+
+    <button onclick="showMessage()">
+        Натисни за изненада 🎁
+    </button>
+
+    <div id="msg" class="message hidden">
+        ✨ Пожелавам ти здраве, щастие, късмет и безброй поводи за усмивки!<br><br>
+        Нека всяка твоя мечта намери път към реалността. 🎉
+    </div>
+</div>
+
+<script>
+
+function showMessage(){
+
+    document.getElementById("msg").classList.remove("hidden");
+
+    for(let i=0;i<150;i++){
+
+        const conf=document.createElement("div");
+
+        conf.classList.add("confetti");
+
+        conf.style.left=Math.random()*100+"vw";
+
+        conf.style.background=
+            `hsl(${Math.random()*360},100%,50%)`;
+
+        conf.style.animationDuration=
+            (Math.random()*3+2)+"s";
+
+        document.body.appendChild(conf);
+
+        setTimeout(()=>{
+            conf.remove();
+        },5000);
+    }
+}
+</script>
+
+</body>
+</html>
